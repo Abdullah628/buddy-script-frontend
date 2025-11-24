@@ -22,3 +22,17 @@ export async function create(payload: { text: string; media: IMedia[]; visibilit
         body: JSON.stringify(payload),
     });
 }
+
+export async function getSinglePost({postId}: {postId: string}) {
+    return api(`/posts/${postId}`, {
+        method: "GET",
+    });
+}
+
+
+export async function deletePost({postId}: {postId: string}) {
+    return api(`/posts/${postId}`, {
+        method: "DELETE",
+    });
+}
+

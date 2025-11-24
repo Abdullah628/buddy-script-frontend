@@ -11,3 +11,9 @@ export async function publicPosts() {
         method: "GET",
     });
 }
+
+export async function myFeed({userId}: {userId: string}) {
+    return api(`/posts/user/${userId}`, {
+        method: "GET",
+    });
+}

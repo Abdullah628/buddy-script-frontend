@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { login } from "@/app/api/auth/login"
+import { login } from "@/app/api/auth"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Eye, EyeOff } from "lucide-react"
@@ -56,7 +56,12 @@ export default function LoginForm() {
           <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-12 space-y-6">
             {/* Logo Section */}
             <div className="flex justify-center mb-2">
-              <div className="text-blue-600 font-bold text-2xl">⚡ BuddyScript</div>
+              <Image
+                src="/logo.svg"
+                alt="BuddyScript Logo"
+                width={200}
+                height={200}
+              />
             </div>
 
             {/* Welcome Text */}

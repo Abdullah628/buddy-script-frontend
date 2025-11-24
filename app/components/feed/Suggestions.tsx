@@ -53,7 +53,7 @@ export default function Suggestions() {
             <div key={idx} className="flex items-start justify-between">
               <div className="flex items-center gap-3 flex-1">
                 <img
-                  src={person.avatarUrl || "/placeholder.svg?height=48&width=48&query=user"}
+                  src={person.avatarUrl || "/user-preview.png"}
                   alt={person.name}
                   className="w-12 h-12 rounded-full"
                 />
@@ -95,7 +95,7 @@ export default function Suggestions() {
               <div className="flex items-center gap-3 flex-1">
                 <div className="relative">
                   <img
-                    src={friend.avatarUrl || "/placeholder.svg?height=40&width=40&query=user"}
+                    src={friend.avatarUrl || "/user-preview.png"}
                     alt={friend.name}
                     className="w-10 h-10 rounded-full"
                   />

@@ -16,7 +16,7 @@ export default function Stories() {
         <div key={idx} className="flex-shrink-0">
           <div className="relative w-28 h-40 rounded-xl bg-gray-900 overflow-hidden cursor-pointer hover:opacity-80 transition">
             <img
-              src={story.image || "/placeholder.svg?height=160&width=120&query=story"}
+              src={story.image || "/user-preview.png"}
               alt={story.name}
               className="w-full h-full object-cover"
             />
@@ -31,7 +31,7 @@ export default function Stories() {
               <>
                 <div className="absolute top-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <img
-                    src={`/placeholder.svg?height=32&width=32&query=avatar`}
+                    src={`/user-preview.png`}
                     alt="Avatar"
                     className="w-6 h-6 rounded-full"
                   />

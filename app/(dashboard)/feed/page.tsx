@@ -6,7 +6,7 @@ import Stories from "@/app/components/feed/Stories"
 import CreatePost from "@/app/components/feed/CreatePost"
 import PostCard from "@/app/components/feed/PostCard"
 import Suggestions from "@/app/components/feed/Suggestions"
-import { publicPosts } from "@/app/api/feed/getFeed"
+import { publicPosts } from "@/app/api/feed"
 import React from "react"
 import { useEffect, useState } from "react"
 
