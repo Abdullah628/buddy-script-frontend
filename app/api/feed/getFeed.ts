@@ -5,3 +5,9 @@ export async function getFeed() {
         method: "GET",
     });
 }
+
+export async function publicPosts() {
+    return api("/posts/public", {
+        method: "GET",
+    });
+}
