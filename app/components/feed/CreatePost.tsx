@@ -4,9 +4,12 @@ import type React from "react"
 
 import { useState } from "react"
 import { ImageIcon, Video, Calendar, FileText, Send } from "lucide-react"
-import { create, getPresignedUrl } from "@/app/api/posts"
+import { create } from "@/app/api/posts"
+import { uploadMedia } from "@/app/api/upload/index"
+import { useRouter } from "next/navigation"
 
 export default function CreatePost() {
+  const router = useRouter()
   const [text, setText] = useState("")
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState("")
@@ -22,21 +25,22 @@ export default function CreatePost() {
   }
 
   const uploadFile = async (file: File) => {
+    // convert File -> data URL (base64) which backend uploader accepts
+    const readAsDataURL = (f: File) => new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = reject
+      reader.readAsDataURL(f)
+    })
+
     try {
-      const res = await getPresignedUrl(file.name)
-      if (!res || !res.success || !res.data) throw new Error("Failed to get presigned URL")
-      
-      const { url, publicUrl } = res.data
-      
-      await fetch(url, {
-        method: "PUT",
-        body: file,
-        headers: {
-          "Content-Type": file.type,
-        },
-      })
-      
-      return publicUrl
+      const dataUrl = await readAsDataURL(file)
+      // optional: send a folder name, e.g. 'posts'
+      const res = await uploadMedia(dataUrl, "posts")
+      const data: any = (res && (res.data || res)) || res
+      const url = data?.url || data?.secure_url || null
+      if (!url) throw new Error("Upload did not return a url")
+      return { url, meta: data }
     } catch (error) {
       console.error("Upload failed:", error)
       throw error
@@ -51,11 +55,18 @@ export default function CreatePost() {
       let media: any[] = []
       
       if (file) {
-        const publicUrl = await uploadFile(file)
+        const uploaded = await uploadFile(file)
+        // uploaded = { url, meta }
         media.push({
-          url: publicUrl,
-          type: file.type,
+          url: uploaded.url,
+          type: "image",
+          meta: {
+            width: uploaded.meta.width,
+            height: uploaded.meta.height,
+          },
         })
+        // show uploaded url in preview so user sees final image
+        setPreview(uploaded.url)
       }
 
       await create({
@@ -68,6 +79,16 @@ export default function CreatePost() {
       setFile(null)
       setPreview("")
       setVisibility("public")
+      // refresh the page so the new post appears
+      // router.refresh() sometimes doesn't trigger a visible update in some setups,
+      // so fall back to a full reload to guarantee the new post appears.
+      try {
+        router.refresh()
+      } catch (err) {
+        // ignore and reload below
+      }
+      // ensure reload so the feed definitely shows the new post
+      window.location.reload()
       // Optional: Refresh feed or show success message
     } catch (error) {
       console.error("Error creating post:", error)

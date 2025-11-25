@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { Play, BarChart3, Users, Bookmark, Users2, Gamepad2, Settings, Save } from "lucide-react"
+import { url } from "inspector"
 
 interface SidebarItem {
   icon: React.ReactNode
@@ -51,13 +52,13 @@ export default function Sidebar() {
 
         <div className="space-y-4">
           {[
-            { name: "Steve Jobs", role: "CEO of Apple" },
+            { name: "Mark Paule", url: "/img1.png", role: "CEO of Apple" },
             { name: "Ryan Roslansky", role: "CEO of Linkedin" },
           ].map((person, idx) => (
             <div key={idx} className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
-                  src={`/.jpg?height=40&width=40&query=${person.name}`}
+                  src={person.url || "/user-preview.png"}
                   alt={person.name}
                   className="w-10 h-10 rounded-full"
                 />

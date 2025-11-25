@@ -5,9 +5,10 @@ import { Plus } from "lucide-react"
 export default function Stories() {
   const stories = [
     { name: "Your Story", isOwn: true },
-    { name: "Ryan Roslansky", image: "/person-named-ryan.png" },
-    { name: "Ryan Roslansky", image: "/ryan2.jpg" },
-    { name: "Ryan Roslansky", image: "/ryan3.jpg" },
+    { name: "Ryan Roslansky", image: "/card_ppl1.png" },
+    { name: "Ryan Roslansky", image: "/card_ppl2.png" },
+    { name: "Ryan Roslansky", image: "/card_ppl3.png" },
+    { name: "Ryan Roslansky", image: "/card_ppl4.png" },
   ]
 
   return (

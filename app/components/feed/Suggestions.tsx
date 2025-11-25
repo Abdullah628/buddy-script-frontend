@@ -14,7 +14,7 @@ export default function Suggestions() {
     {
       name: "Radovan SkillArena",
       role: "Founder & CEO at Trophy",
-      avatarUrl: "/radovan.jpg",
+      avatarUrl: "/img1.png",
     },
   ]
 
@@ -22,19 +22,19 @@ export default function Suggestions() {
     {
       name: "Steve Jobs",
       role: "CEO of Apple",
-      avatarUrl: "/steve.jpg",
+      avatarUrl: "/img5.png",
       isOnline: false,
     },
     {
       name: "Ryan Roslansky",
       role: "CEO of Linkedin",
-      avatarUrl: "/person-named-ryan.png",
+      avatarUrl: "/img6.png",
       isOnline: true,
     },
     {
       name: "Dylan Field",
       role: "CEO of Figma",
-      avatarUrl: "/dylan.jpg",
+      avatarUrl: "/img7.png",
       isOnline: true,
     },
   ]

@@ -29,6 +29,14 @@ export async function getSinglePost({postId}: {postId: string}) {
     });
 }
 
+// update a post
+export async function updatePost({postId, text, visibility}: {postId: string, text?: string, visibility?: "public" | "private" }) {
+    return api(`/posts/${postId}`, {    
+        method: "PATCH",
+        body: JSON.stringify({text, visibility}),
+    });
+}
+
 
 export async function deletePost({postId}: {postId: string}) {
     return api(`/posts/${postId}`, {

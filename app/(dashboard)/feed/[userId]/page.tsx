@@ -1,12 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Home } from "lucide-react"
 import { myFeed } from "@/app/api/feed"
 import PostCard from "@/app/components/feed/PostCard"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 export default function UserFeedPage() {
   const params = useParams()
+  const router = useRouter()
   const [posts, setPosts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -51,7 +53,14 @@ export default function UserFeedPage() {
 
   return (
     <div className="max-w-2xl mx-auto py-6 px-4">
-      <h1 className="text-2xl font-bold mb-6">My Feed</h1>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <button onClick={() => router.push('/')} className="p-2 bg-gray-100 rounded-md hover:bg-gray-200">
+            <Home className="w-5 h-5 text-gray-700" />
+          </button>
+          <h1 className="text-2xl font-bold">My Feed</h1>
+        </div>
+      </div>
       <div className="space-y-6">
         {posts.length === 0 ? (
           <p className="text-center text-gray-500">No posts yet.</p>

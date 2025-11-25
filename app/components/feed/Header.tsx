@@ -60,7 +60,7 @@ export default function Header() {
 
         {/* Right Icons - Hidden on mobile except user */}
         <div className="hidden md:flex items-center gap-6 ml-6">
-          <button className="p-2 hover:bg-gray-100 rounded-full transition">
+          <button onClick={() => router.push('/')} className="p-2 hover:bg-gray-100 rounded-full transition">
             <Home className="w-6 h-6 text-gray-600" />
           </button>
           <button className="p-2 hover:bg-gray-100 rounded-full transition">
