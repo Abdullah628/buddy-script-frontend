@@ -9,9 +9,11 @@ import Suggestions from "@/app/components/feed/Suggestions"
 import { publicPosts } from "@/app/api/feed"
 import React from "react"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { me } from "@/app/api/auth"
 
 export default function FeedPage() {
-
+  const router = useRouter()
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -20,6 +22,17 @@ export default function FeedPage() {
 
     async function loadFeed() {
       try {
+        // Guard: if session ended, redirect to login
+        try {
+          const auth = await me()
+          if (!auth || auth.success === false || !auth.data) {
+            router.push("/login")
+            return
+          }
+        } catch {
+          router.push("/login")
+          return
+        }
         const postsData = await publicPosts()
         if (isMounted) setPosts(postsData.data || [])
       } catch (err) {
