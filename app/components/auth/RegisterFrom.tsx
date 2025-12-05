@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { register } from "@/app/api/auth/register"
+import { register } from "@/app/api/auth"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Chromium, Eye, EyeOff } from "lucide-react"
